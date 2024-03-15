@@ -19,6 +19,12 @@ function App() {
     setError(false);
   };
 
+  const removeLocation = (id) => {
+    const index = locations.findIndex((location) => location.id === id);
+    locations.splice(index, 1);
+    setLocations([...locations]);
+  };
+
   useEffect(() => {
     console.log("locations", locations);
   }, [locations]);
@@ -30,7 +36,10 @@ function App() {
       <main>
         <SearchBar addLocation={addLocation} />
         {error && <FeedbackBar close={closeFeedback} />}
-        <LocationBar card={locations}></LocationBar>
+        <LocationBar
+          card={locations}
+          removeLocation={removeLocation}
+        ></LocationBar>
         <Weather></Weather>
       </main>
     </>
