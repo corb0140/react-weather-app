@@ -40,7 +40,9 @@ export default function SearchBar(props) {
           country: data[0].country,
         });
 
-        setSearch("");
+        setTimeout(() => {
+          setSearch("");
+        }, 2000);
 
         return;
       })
