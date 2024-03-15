@@ -7,12 +7,16 @@ import LocationBar from "../components/LocationBar/LocationBar";
 import Weather from "../components/Weather/Weather";
 import { useState, useEffect } from "react";
 
-function App(props) {
+function App() {
   const [error, setError] = useState(false);
   const [locations, setLocations] = useState([]);
 
   const addLocation = (location) => {
     setLocations([...locations, location]);
+  };
+
+  const closeFeedback = () => {
+    setError(false);
   };
 
   useEffect(() => {
@@ -25,7 +29,7 @@ function App(props) {
 
       <main>
         <SearchBar addLocation={addLocation} />
-        {error && <FeedbackBar />} {/* show only when there is an error  */}
+        {error && <FeedbackBar close={closeFeedback} />}
         <LocationBar card={locations}></LocationBar>
         <Weather></Weather>
       </main>
