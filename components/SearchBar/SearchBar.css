@@ -1,0 +1,52 @@
+.search-bar {
+  background-color: var(--dominant-color-shade-1);
+}
+
+form.container {
+  width: min(65em, 100%);
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 1rem;
+
+  color: var(--off-white-color);
+}
+
+​.container--text {
+  width: min(45em, 100%);
+}
+
+input {
+  border: none;
+  padding: 0.85rem 0;
+  width: 90%;
+}
+
+input[type="text"] {
+  outline: none;
+  text-indent: 0.5rem;
+}
+
+input[type="submit"] {
+  transition: all 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover {
+  border-radius: 0.765rem;
+}
+
+@media only screen and (min-width: 65em) {
+  form.container {
+    flex-direction: row;
+  }
+
+  input {
+    border: none;
+    padding: 0.5rem 0;
+    width: 35%;
+  }
+}

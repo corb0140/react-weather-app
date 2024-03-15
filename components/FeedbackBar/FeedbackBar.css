@@ -1,0 +1,23 @@
+.feedback {
+  background-color: var(--secondary-color);
+  padding: 0.5rem 1rem;
+
+  display: flex;
+
+  color: var(--off-white-color);
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedback-text {
+  position: relative;
+  margin: 0;
+  left: 50%;
+
+  translate: -50%;
+}
+
+.feedback-close:hover {
+  cursor: pointer;
+}
