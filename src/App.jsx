@@ -73,7 +73,7 @@ function App() {
       });
 
     console.log("locations", locations);
-  }, [latRef, lonRef]);
+  }, []);
 
   return (
     <>
