@@ -39,6 +39,9 @@ export default function SearchBar(props) {
           name: data[0].name,
           country: data[0].country,
         });
+
+        setSearch("");
+
         return;
       })
       .catch((error) => {
