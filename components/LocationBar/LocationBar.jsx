@@ -15,7 +15,7 @@ export default function LocationBar(props) {
                 name={card.name}
                 country={card.country}
                 remove={(ev) => props.removeLocation(card.id, ev)}
-                shake={props.shake}
+                getWeather={() => props.getWeather(card.id)}
               />
             ))}
         </ul>

@@ -22,6 +22,7 @@ export default function SearchBar(props) {
       return;
     }
 
+    // call openweathermap api to get the location
     fetch(
       `https://api.openweathermap.org/geo/1.0/direct?q=${search}&appid=${process.env.REACT_APP_API_KEY}`
     )

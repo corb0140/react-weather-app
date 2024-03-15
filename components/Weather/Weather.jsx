@@ -1,23 +1,32 @@
+import { useState } from "react";
 import "./Weather.css";
 
 import Loading from "../Loading/Loading";
 
-export default function Weather(props) {
+export default function Weather({ weather }) {
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="weather">
       <div className="container">
-        <Loading />
+        {loading && <Loading />}
 
-        <h2 className="weather-title">Weather for {props.city}</h2>
+        <h2 className="weather-title" onClick={() => setLoading(!loading)}>
+          Weather for {weather.city}
+        </h2>
 
-        <img src="" alt="" />
-
-        <div className="weather-content">
-          <p className="weather-content--text"></p>
-          <p className="weather-content--text"></p>
-          <p className="weather-content--text"></p>
-          <p className="weather-content--text"></p>
-        </div>
+        {!loading && (
+            <img src={weather.icon} alt={"image of " + weather.src} />
+          ) && (
+            <div className="weather-content">
+              <p className="weather-content--text">
+                {weather.main} - {weather.description}
+              </p>
+              <p className="weather-content--text">{weather.temp}</p>
+              <p className="weather-content--text">{weather.feel_like}</p>
+              <p className="weather-content--text">{weather.wind_speed}</p>
+            </div>
+          )}
       </div>
     </div>
   );
