@@ -11,18 +11,37 @@ function App() {
   const [error, setError] = useState(false);
   const [locations, setLocations] = useState([]);
 
+  // add location
   const addLocation = (location) => {
     setLocations([...locations, location]);
   };
 
+  // close feedback
   const closeFeedback = () => {
     setError(false);
   };
 
-  const removeLocation = (id) => {
+  //remove Location
+  const removeLocation = (id, ev) => {
     const index = locations.findIndex((location) => location.id === id);
     locations.splice(index, 1);
     setLocations([...locations]);
+
+    console.log(ev);
+    ev.stopPropagation();
+  };
+
+  //spin card
+  const shakeCard = (ev) => {
+    console.log(ev.target);
+    if (ev.target) {
+      ev.target.classList.add("shake");
+
+      setTimeout(() => {
+        ev.target.classList.remove("shake");
+        console.warn("Don't touch me buddy! I'm warning you!");
+      }, 500);
+    }
   };
 
   useEffect(() => {
@@ -38,6 +57,7 @@ function App() {
         {error && <FeedbackBar close={closeFeedback} />}
         <LocationBar
           card={locations}
+          shake={shakeCard}
           removeLocation={removeLocation}
         ></LocationBar>
         <Weather></Weather>

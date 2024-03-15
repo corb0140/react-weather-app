@@ -193,3 +193,16 @@ h5 {
 .btn:hover {
   cursor: pointer;
 }
+
+.shake {
+  animation: 0.1s 3 shake alternate linear;
+}
+
+@keyframes shake {
+  0% {
+    translate: -0.5rem;
+  }
+  100% {
+    translate: 0.5rem;
+  }
+}

@@ -14,7 +14,8 @@ export default function LocationBar(props) {
                 key={card.id}
                 name={card.name}
                 country={card.country}
-                remove={() => props.removeLocation(card.id)}
+                remove={(ev) => props.removeLocation(card.id, ev)}
+                shake={props.shake}
               />
             ))}
         </ul>
