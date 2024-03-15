@@ -27,7 +27,6 @@ function App() {
     locations.splice(index, 1);
     setLocations([...locations]);
 
-    console.log(ev);
     ev.stopPropagation();
   };
 
@@ -45,6 +44,9 @@ function App() {
   };
 
   useEffect(() => {
+    if (locations.length === 0) {
+      return;
+    }
     console.log("locations", locations);
   }, [locations]);
 

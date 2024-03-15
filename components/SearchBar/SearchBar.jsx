@@ -43,12 +43,12 @@ export default function SearchBar(props) {
         setTimeout(() => {
           setSearch("");
         }, 2000);
-
-        return;
       })
       .catch((error) => {
         console.log(error);
       });
+
+    return () => {};
   }, [search]);
 
   useEffect(() => {
