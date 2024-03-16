@@ -5,7 +5,6 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import FeedbackBar from "../components/FeedbackBar/FeedbackBar";
 import LocationBar from "../components/LocationBar/LocationBar";
 import Weather from "../components/Weather/Weather";
-import Loading from "../components/Loading/Loading";
 import { useState, useEffect, useRef } from "react";
 
 function App() {
