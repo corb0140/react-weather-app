@@ -18,14 +18,19 @@ function App() {
   const latRef = useRef(null);
   const lonRef = useRef(null);
 
-  // add location
-  const addLocation = (location) => {
-    setLocations([...locations, location]);
+  //show feedback
+  const showFeedback = () => {
+    setError(true);
   };
 
   // close feedback
   const closeFeedback = () => {
     setError(false);
+  };
+
+  // add location
+  const addLocation = (location) => {
+    setLocations([...locations, location]);
   };
 
   //remove Location
@@ -51,8 +56,6 @@ function App() {
     if (locations.length === 0) {
       return;
     }
-
-    console.log("fetching weather data");
 
     //call openweathermap api to get the weather
     fetch(
@@ -88,7 +91,7 @@ function App() {
       <Header />
 
       <main>
-        <SearchBar addLocation={addLocation} />
+        <SearchBar addLocation={addLocation} error={showFeedback} />
         {error && <FeedbackBar close={closeFeedback} />}
         <LocationBar
           card={locations}

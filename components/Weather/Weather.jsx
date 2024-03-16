@@ -25,7 +25,10 @@ export default function Weather({ weather }) {
           ""
         ) : (
           <div className="weather-info--wrapper">
-            <img src={weather.icon} alt={"image of " + weather.src} />
+            <img
+              src={weather.icon}
+              alt={"icon image of " + weather.description}
+            />
 
             <div className="weather-content">
               <p className="weather-content--text">
