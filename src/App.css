@@ -36,6 +36,8 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   margin: 0;
+
+  background-color: #242424;
 }
 
 /* Update default margin */

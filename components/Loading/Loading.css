@@ -1,3 +1,31 @@
 .loading {
-  font-size: 3rem;
+  font-size: 1.5rem;
+}
+
+.loading-dot {
+  font-size: 2rem;
+  padding: 0 0.05rem;
+  animation: opacity 1s infinite linear;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.loading-dot--1 {
+  animation-delay: 0.3s;
+}
+.loading-dot--2 {
+  animation-delay: 0.5s;
+}
+.loading-dot--3 {
+  animation-delay: 0.7s;
 }

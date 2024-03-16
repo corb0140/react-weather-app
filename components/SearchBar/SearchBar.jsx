@@ -32,7 +32,6 @@ export default function SearchBar(props) {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         props.addLocation({
           id: crypto.randomUUID(),
           lat: data[0].lat,

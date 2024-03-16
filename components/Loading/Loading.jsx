@@ -6,9 +6,9 @@ export default function Loading() {
       <div className="container">
         <p className="loading">
           Loading
-          <span className="loading__dot">.</span>
-          <span className="loading__dot">.</span>
-          <span className="loading__dot">.</span>
+          <span className="loading-dot loading-dot--1">.</span>
+          <span className="loading-dot loading-dot--2">.</span>
+          <span className="loading-dot loading-dot--3">.</span>
         </p>
       </div>
     </div>

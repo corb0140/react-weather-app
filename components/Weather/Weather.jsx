@@ -15,12 +15,16 @@ export default function Weather({ weather }) {
   return (
     <div className="weather">
       <div className="container">
-        <h2 className="weather-title">Weather for {weather.city}</h2>
+        {!loading ? (
+          <h2 className="weather-title">No Location Selected</h2>
+        ) : (
+          <h2 className="weather-title">Weather for {weather.city}</h2>
+        )}
 
         {!loading ? (
-          <Loading />
+          ""
         ) : (
-          <>
+          <div className="weather-info--wrapper">
             <img src={weather.icon} alt={"image of " + weather.src} />
 
             <div className="weather-content">
@@ -37,7 +41,7 @@ export default function Weather({ weather }) {
                 Wind: {weather.wind_speed} m/s
               </p>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

@@ -8,9 +8,13 @@ import Weather from "../components/Weather/Weather";
 import { useState, useEffect, useRef } from "react";
 
 function App() {
+  // error state
   const [error, setError] = useState(false);
+  // location state
   const [locations, setLocations] = useState([]);
+  // weather states & refs
   const [weatherData, setWeatherData] = useState("");
+  const [state, setState] = useState(false);
   const latRef = useRef(null);
   const lonRef = useRef(null);
 
@@ -37,15 +41,18 @@ function App() {
   const getWeather = (id) => {
     const index = locations.findIndex((location) => location.id === id);
     const location = locations[index];
-    latRef.current = `${location.lat}`;
-    lonRef.current = `${location.lon}`;
-    console.log(latRef.current, lonRef.current);
+    latRef.current = location.lat;
+    lonRef.current = location.lon;
+
+    setState(!state);
   };
 
   useEffect(() => {
     if (locations.length === 0) {
       return;
     }
+
+    console.log("fetching weather data");
 
     //call openweathermap api to get the weather
     fetch(
@@ -57,7 +64,6 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setWeatherData({
           city: data.name,
           icon: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
@@ -69,11 +75,13 @@ function App() {
         });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
 
     console.log("locations", locations);
-  }, []);
+
+    return () => {};
+  }, [latRef.current, lonRef.current]);
 
   return (
     <>
