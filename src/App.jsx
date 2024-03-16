@@ -5,6 +5,7 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import FeedbackBar from "../components/FeedbackBar/FeedbackBar";
 import LocationBar from "../components/LocationBar/LocationBar";
 import Weather from "../components/Weather/Weather";
+import Loading from "../components/Loading/Loading";
 import { useState, useEffect, useRef } from "react";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   // weather states & refs
   const [weatherData, setWeatherData] = useState("");
   const [weatherState, setWeatherState] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const latRef = useRef(null);
   const lonRef = useRef(null);
 
@@ -88,24 +90,35 @@ function App() {
       .then((response) => {
         if (!response.ok) throw new Error("Incorrect Latitude & or Longitude");
 
+        // show loading before making api call
+        setIsLoading(true);
+
         return response.json();
       })
       .then((data) => {
-        setWeatherData({
-          city: data.name,
-          icon: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
-          main: data.weather[0].main,
-          description: data.weather[0].description,
-          temp: data.main.temp,
-          feel_like: data.main.feels_like,
-          wind_speed: data.wind.speed,
-        });
+        setTimeout(() => {
+          setWeatherData({
+            city: data.name,
+            icon: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
+            main: data.weather[0].main,
+            description: data.weather[0].description,
+            temp: data.main.temp,
+            feel_like: data.main.feels_like,
+            wind_speed: data.wind.speed,
+          });
+        }, 3000);
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2900);
       });
 
-    console.log("locations", locations);
+    // console.log("loading", isLoading);
+    // console.log("locations", locations);
 
     return () => {};
   }, [latRef.current, lonRef.current]);
@@ -124,7 +137,7 @@ function App() {
           getWeather={getWeather}
           removeLocation={removeLocation}
         ></LocationBar>
-        <Weather weather={weatherData}></Weather>
+        <Weather weather={weatherData} isLoading={isLoading}></Weather>
       </main>
     </>
   );

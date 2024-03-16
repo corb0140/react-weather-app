@@ -3,25 +3,30 @@ import "./Weather.css";
 
 import Loading from "../Loading/Loading";
 
-export default function Weather({ weather }) {
-  const [loading, setLoading] = useState(null);
+export default function Weather({ isLoading: isLoading, weather: weather }) {
+  const [showWeatherData, setShowWeatherData] = useState(null);
+  let loading = { isLoading };
 
   useEffect(() => {
     if (weather) {
-      setLoading(true);
+      setShowWeatherData(true);
     }
+
+    return () => {};
   }, [weather]);
 
   return (
     <div className="weather">
       <div className="container">
-        {!loading ? (
+        {!showWeatherData ? (
           <h2 className="weather-title">No Location Selected</h2>
         ) : (
           <h2 className="weather-title">Weather for {weather.city}</h2>
         )}
 
-        {!loading ? (
+        {loading.isLoading && <Loading />}
+
+        {!showWeatherData ? (
           ""
         ) : (
           <div className="weather-info--wrapper">
