@@ -12,8 +12,6 @@ form.container {
   align-items: center;
 
   gap: 1rem;
-
-  color: var(--off-white-color);
 }
 
 ​.container--text {
@@ -29,6 +27,7 @@ input {
 input[type="text"] {
   outline: none;
   text-indent: 0.5rem;
+  background-color: white;
 }
 
 input[type="submit"] {
