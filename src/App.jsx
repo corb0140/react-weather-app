@@ -8,21 +8,22 @@ import Weather from "../components/Weather/Weather";
 import { useState, useEffect, useRef } from "react";
 
 function App() {
-  // feedback state & ref
+  // feedback states
   const [error, setError] = useState(false);
-  const feedBackMessageRef = useRef(null);
+  const [feedBackMessage, setFeedBackMessage] = useState("");
+  // const feedBackMessageRef = useRef(null);
   // location state
   const [locations, setLocations] = useState([]);
   // weather states & refs
   const [weatherData, setWeatherData] = useState("");
-  const [state, setState] = useState(false);
+  const [weatherState, setWeatherState] = useState(false);
   const latRef = useRef(null);
   const lonRef = useRef(null);
 
   //show feedback
   const showFeedback = () => {
     setError(true);
-    feedBackMessageRef.current = "No matching locations";
+    setFeedBackMessage("No matching locations");
   };
 
   // close feedback
@@ -30,14 +31,30 @@ function App() {
     setError(false);
   };
 
+  // remove feedback message after 3 seconds
+  useEffect(() => {
+    if (feedBackMessage === "" || feedBackMessage === null) {
+      return;
+    } else if (
+      feedBackMessage === "No matching locations" ||
+      feedBackMessage === "Maximum of 5 locations reached"
+    ) {
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    }
+
+    return () => {};
+  }, [feedBackMessage]);
+
   // add location
   const addLocation = (location) => {
     if (locations.length < 5) {
       setLocations([...locations, location]);
     } else {
       // show feedback component when there are 5 locations
-      feedBackMessageRef.current = "Maximum of 5 locations reached";
       setError(true);
+      setFeedBackMessage("Maximum of 5 locations reached");
     }
   };
 
@@ -57,7 +74,7 @@ function App() {
     latRef.current = location.lat;
     lonRef.current = location.lon;
 
-    setState(!state);
+    setWeatherState(!weatherState);
   };
 
   useEffect(() => {
@@ -101,10 +118,7 @@ function App() {
       <main>
         <SearchBar addLocation={addLocation} error={showFeedback} />
         {error && (
-          <FeedbackBar
-            message={feedBackMessageRef.current}
-            close={closeFeedback}
-          />
+          <FeedbackBar message={feedBackMessage} close={closeFeedback} />
         )}
         <LocationBar
           card={locations}
