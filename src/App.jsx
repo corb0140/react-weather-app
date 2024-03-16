@@ -8,8 +8,9 @@ import Weather from "../components/Weather/Weather";
 import { useState, useEffect, useRef } from "react";
 
 function App() {
-  // error state
+  // feedback state & ref
   const [error, setError] = useState(false);
+  const feedBackMessageRef = useRef(null);
   // location state
   const [locations, setLocations] = useState([]);
   // weather states & refs
@@ -21,6 +22,7 @@ function App() {
   //show feedback
   const showFeedback = () => {
     setError(true);
+    feedBackMessageRef.current = "No matching locations";
   };
 
   // close feedback
@@ -30,7 +32,13 @@ function App() {
 
   // add location
   const addLocation = (location) => {
-    setLocations([...locations, location]);
+    if (locations.length < 5) {
+      setLocations([...locations, location]);
+    } else {
+      // show feedback component when there are 5 locations
+      feedBackMessageRef.current = "Maximum of 5 locations reached";
+      setError(true);
+    }
   };
 
   //remove Location
@@ -92,7 +100,12 @@ function App() {
 
       <main>
         <SearchBar addLocation={addLocation} error={showFeedback} />
-        {error && <FeedbackBar close={closeFeedback} />}
+        {error && (
+          <FeedbackBar
+            message={feedBackMessageRef.current}
+            close={closeFeedback}
+          />
+        )}
         <LocationBar
           card={locations}
           getWeather={getWeather}

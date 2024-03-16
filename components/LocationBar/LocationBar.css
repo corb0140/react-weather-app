@@ -16,3 +16,15 @@
   align-items: center;
   justify-content: center;
 }
+
+@media only screen and (min-width: 45em) {
+  .location-list {
+    --cols: 2;
+  }
+}
+
+@media only screen and (min-width: 65em) {
+  .location-list {
+    --cols: 3;
+  }
+}

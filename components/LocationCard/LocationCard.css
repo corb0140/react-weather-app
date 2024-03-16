@@ -4,7 +4,9 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 5rem;
+  height: 100%;
+  width: 100%;
+  padding: 3rem;
 
   border: 0.25rem solid rgba(0, 0, 0, 0.706);
 
