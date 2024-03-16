@@ -11,7 +11,6 @@ function App() {
   // feedback states
   const [error, setError] = useState(false);
   const [feedBackMessage, setFeedBackMessage] = useState("");
-  // const feedBackMessageRef = useRef(null);
   // location state
   const [locations, setLocations] = useState([]);
   // weather states & refs
