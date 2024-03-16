@@ -114,7 +114,7 @@ function App() {
       .finally(() => {
         setTimeout(() => {
           setIsLoading(false);
-        }, 2900);
+        }, 3000);
       });
 
     // console.log("loading", isLoading);
