@@ -45,7 +45,7 @@ function App() {
     }
 
     return () => {};
-  }, [feedBackMessage]);
+  }, [error]);
 
   // add location
   const addLocation = (location) => {
@@ -115,9 +115,6 @@ function App() {
           setIsLoading(false);
         }, 3000);
       });
-
-    // console.log("loading", isLoading);
-    // console.log("locations", locations);
 
     return () => {};
   }, [latRef.current, lonRef.current]);
