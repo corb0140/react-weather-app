@@ -11,6 +11,7 @@ function App() {
   // feedback states
   const [error, setError] = useState(false);
   const [feedBackMessage, setFeedBackMessage] = useState("");
+  const timerRef = useRef(null);
   // location state
   const [locations, setLocations] = useState([]);
   // weather states & refs
@@ -29,23 +30,27 @@ function App() {
   // close feedback
   const closeFeedback = () => {
     setError(false);
+    setFeedBackMessage("");
   };
 
   // remove feedback message after 3 seconds
   useEffect(() => {
     if (feedBackMessage === "" || feedBackMessage === null) {
+      clearTimeout(timerRef.current);
       return;
     } else if (
       feedBackMessage === "No matching locations" ||
       feedBackMessage === "Maximum of 5 locations reached"
     ) {
-      setTimeout(() => {
+      timerRef.current = setTimeout(() => {
+        setFeedBackMessage("");
         setError(false);
+        console.log("feedback removed");
       }, 3000);
     }
 
     return () => {};
-  }, [error]);
+  }, [feedBackMessage]);
 
   // add location
   const addLocation = (location) => {
