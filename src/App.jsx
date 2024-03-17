@@ -45,7 +45,6 @@ function App() {
       timerRef.current = setTimeout(() => {
         setFeedBackMessage("");
         setError(false);
-        console.log("feedback removed");
       }, 3000);
     }
 
