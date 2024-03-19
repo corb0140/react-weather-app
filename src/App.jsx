@@ -1,25 +1,26 @@
 import "./App.css";
 
-import Header from "../components/Header/Header";
-import SearchBar from "../components/SearchBar/SearchBar";
-import FeedbackBar from "../components/FeedbackBar/FeedbackBar";
-import LocationBar from "../components/LocationBar/LocationBar";
-import Weather from "../components/Weather/Weather";
-import { useState, useEffect, useRef } from "react";
+import Header from "./components/Header/Header";
+import SearchBar from "./components/SearchBar/SearchBar";
+import FeedbackBar from "./components/FeedbackBar/FeedbackBar";
+import LocationBar from "./components/LocationBar/LocationBar";
+import Weather from "./components/Weather/Weather";
+import { useState, useEffect } from "react";
 
 function App() {
   // feedback states
   const [error, setError] = useState(false);
   const [feedBackMessage, setFeedBackMessage] = useState("");
-  const timerRef = useRef(null);
+  const [timer, setTimer] = useState(null);
+
   // location state
   const [locations, setLocations] = useState([]);
+
   // weather states & refs
-  const [weatherData, setWeatherData] = useState("");
+  const [weatherData, setWeatherData] = useState({});
   const [weatherState, setWeatherState] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const latRef = useRef(null);
-  const lonRef = useRef(null);
+  const [coords, setCoords] = useState({ lat: null, lon: null });
 
   //show feedback
   const showFeedback = () => {
@@ -36,16 +37,18 @@ function App() {
   // remove feedback message after 3 seconds
   useEffect(() => {
     if (feedBackMessage === "" || feedBackMessage === null) {
-      clearTimeout(timerRef.current);
+      clearTimeout(timer);
       return;
     } else if (
       feedBackMessage === "No matching locations" ||
       feedBackMessage === "Maximum of 5 locations reached"
     ) {
-      timerRef.current = setTimeout(() => {
-        setFeedBackMessage("");
-        setError(false);
-      }, 3000);
+      setTimer(
+        setTimeout(() => {
+          setFeedBackMessage("");
+          setError(false);
+        }, 3000)
+      );
     }
 
     return () => {};
@@ -71,12 +74,11 @@ function App() {
     ev.stopPropagation();
   };
 
-  // get weather]
+  // get weather
   const getWeather = (id) => {
     const index = locations.findIndex((location) => location.id === id);
     const location = locations[index];
-    latRef.current = location.lat;
-    lonRef.current = location.lon;
+    setCoords({ lat: location.lat, lon: location.lon });
 
     setWeatherState(!weatherState);
   };
@@ -88,7 +90,7 @@ function App() {
 
     //call openweathermap api to get the weather
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${latRef.current}&lon=${lonRef.current}&appid=${process.env.REACT_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&appid=${process.env.REACT_APP_API_KEY}`
     )
       .then((response) => {
         if (!response.ok) throw new Error("Incorrect Latitude & or Longitude");
@@ -121,7 +123,7 @@ function App() {
       });
 
     return () => {};
-  }, [latRef.current, lonRef.current]);
+  }, [coords]);
 
   return (
     <>

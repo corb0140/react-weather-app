@@ -1,32 +1,30 @@
 import { useEffect, useState } from "react";
-import "./Weather.css";
+import { PropTypes } from "prop-types";
 
 import Loading from "../Loading/Loading";
+import "./Weather.css";
 
 export default function Weather({ isLoading: isLoading, weather: weather }) {
-  const [showWeatherData, setShowWeatherData] = useState(null);
+  const [showWeatherData, setShowWeatherData] = useState(true);
   let loading = { isLoading };
 
   useEffect(() => {
-    if (weather) {
-      setShowWeatherData(true);
-    }
-
-    return () => {};
+    if (weather.city !== undefined) setShowWeatherData(false);
+    else setShowWeatherData(true);
   }, [weather]);
 
   return (
     <div className="weather">
       <div className="container">
-        {!showWeatherData ? (
+        {loading.isLoading && <Loading />}
+
+        {showWeatherData ? (
           <h2 className="weather-title">No Location Selected</h2>
         ) : (
           <h2 className="weather-title">Weather for {weather.city}</h2>
         )}
 
-        {loading.isLoading && <Loading />}
-
-        {!showWeatherData ? (
+        {showWeatherData ? (
           ""
         ) : (
           <div className="weather-info--wrapper">
@@ -55,3 +53,8 @@ export default function Weather({ isLoading: isLoading, weather: weather }) {
     </div>
   );
 }
+
+Weather.propTypes = {
+  isLoading: PropTypes.bool,
+  weather: PropTypes.object,
+};

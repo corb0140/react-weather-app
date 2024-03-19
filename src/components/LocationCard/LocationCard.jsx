@@ -1,4 +1,5 @@
 import "./LocationCard.css";
+import { PropTypes } from "prop-types";
 
 export default function LocationCard(props) {
   return (
@@ -11,3 +12,10 @@ export default function LocationCard(props) {
     </li>
   );
 }
+
+LocationCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  remove: PropTypes.func.isRequired,
+  getWeather: PropTypes.func.isRequired,
+};

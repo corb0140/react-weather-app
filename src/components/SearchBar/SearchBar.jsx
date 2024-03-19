@@ -1,20 +1,20 @@
 import "./SearchBar.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { PropTypes } from "prop-types";
 
 export default function SearchBar(props) {
   const [search, setSearch] = useState("");
   const [value, setValue] = useState("");
-  const inputRef = useRef(null);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    setSearch(inputRef.current.value);
+    setSearch(value);
 
-    ev.target.reset();
+    setValue("");
   };
 
-  const handleChange = () => {
-    setValue(inputRef.current.value);
+  const handleChange = (ev) => {
+    setValue(ev.target.value);
   };
 
   useEffect(() => {
@@ -53,7 +53,11 @@ export default function SearchBar(props) {
   }, [search]);
 
   useEffect(() => {
-    console.log("search", value);
+    if (value === "") {
+      return;
+    }
+
+    console.log(value);
   }, [value]);
 
   return (
@@ -64,7 +68,7 @@ export default function SearchBar(props) {
           type="text"
           placeholder="Enter A Location"
           name="search"
-          ref={inputRef}
+          value={value}
           onChange={handleChange}
         />
         <input type="submit" value="Location" className="submit btn" />
@@ -72,3 +76,8 @@ export default function SearchBar(props) {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  addLocation: PropTypes.func.isRequired,
+  error: PropTypes.func.isRequired,
+};

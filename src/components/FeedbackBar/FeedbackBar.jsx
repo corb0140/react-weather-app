@@ -1,5 +1,7 @@
 import "./FeedbackBar.css";
 
+import { PropTypes } from "prop-types";
+
 export default function FeedbackBar(props) {
   return (
     <div className="feedback">
@@ -13,3 +15,8 @@ export default function FeedbackBar(props) {
     </div>
   );
 }
+
+FeedbackBar.propTypes = {
+  message: PropTypes.string,
+  close: PropTypes.func,
+};

@@ -1,4 +1,5 @@
 import "./LocationBar.css";
+import { PropTypes } from "prop-types";
 
 import LocationCard from "../LocationCard/LocationCard";
 
@@ -23,3 +24,9 @@ export default function LocationBar(props) {
     </div>
   );
 }
+
+LocationBar.propTypes = {
+  card: PropTypes.array.isRequired,
+  removeLocation: PropTypes.func.isRequired,
+  getWeather: PropTypes.func.isRequired,
+};
