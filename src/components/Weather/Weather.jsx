@@ -6,7 +6,6 @@ import "./Weather.css";
 
 export default function Weather({ isLoading, weather }) {
   const [showWeatherData, setShowWeatherData] = useState(true);
-  const loading = isLoading;
 
   useEffect(() => {
     if (weather.city !== undefined) {
@@ -19,7 +18,7 @@ export default function Weather({ isLoading, weather }) {
   return (
     <div className="weather">
       <div className="container">
-        {loading && <Loading />}
+        {isLoading && <Loading />}
 
         {showWeatherData ? (
           <h2 className="weather-title">No Location Selected</h2>
