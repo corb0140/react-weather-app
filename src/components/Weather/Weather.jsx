@@ -9,8 +9,11 @@ export default function Weather({ isLoading, weather }) {
   const loading = isLoading;
 
   useEffect(() => {
-    if (weather.city !== undefined) setShowWeatherData(false);
-    else setShowWeatherData(true);
+    if (weather.city !== undefined) {
+      setShowWeatherData(false);
+    } else {
+      setShowWeatherData(true);
+    }
   }, [weather]);
 
   return (
