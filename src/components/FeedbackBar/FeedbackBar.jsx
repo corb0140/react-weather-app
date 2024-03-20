@@ -2,13 +2,13 @@ import "./FeedbackBar.css";
 
 import { PropTypes } from "prop-types";
 
-export default function FeedbackBar(props) {
+export default function FeedbackBar({ message, close }) {
   return (
     <div className="feedback">
-      <p className="feedback-text">{props.message}</p>
+      <p className="feedback-text">{message}</p>
       <span
         className="material-symbols-outlined feedback-close"
-        onClick={props.close}
+        onClick={close}
       >
         close
       </span>

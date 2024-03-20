@@ -2,9 +2,10 @@ import "./SearchBar.css";
 import { useState, useEffect } from "react";
 import { PropTypes } from "prop-types";
 
-export default function SearchBar(props) {
+export default function SearchBar({ addLocation, error }) {
   const [search, setSearch] = useState("");
   const [value, setValue] = useState("");
+  const errorProp = error;
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -32,7 +33,7 @@ export default function SearchBar(props) {
         return response.json();
       })
       .then((data) => {
-        props.addLocation({
+        addLocation({
           id: crypto.randomUUID(),
           lat: data[0].lat,
           lon: data[0].lon,
@@ -45,7 +46,7 @@ export default function SearchBar(props) {
         }, 2000);
       })
       .catch((error) => {
-        props.error();
+        errorProp();
         console.error(error);
       });
 

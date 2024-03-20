@@ -3,8 +3,7 @@ import { PropTypes } from "prop-types";
 
 import LocationCard from "../LocationCard/LocationCard";
 
-export default function LocationBar(props) {
-  const card = props.card;
+export default function LocationBar({ card, removeLocation, getWeather }) {
   return (
     <div className="location-bar">
       <div className="container">
@@ -15,8 +14,8 @@ export default function LocationBar(props) {
                 key={card.id}
                 name={card.name}
                 country={card.country}
-                remove={(ev) => props.removeLocation(card.id, ev)}
-                getWeather={() => props.getWeather(card.id)}
+                remove={(ev) => removeLocation(card.id, ev)}
+                getWeather={() => getWeather(card.id)}
               />
             ))}
         </ul>

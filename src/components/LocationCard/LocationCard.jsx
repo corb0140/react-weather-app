@@ -1,12 +1,12 @@
 import "./LocationCard.css";
 import { PropTypes } from "prop-types";
 
-export default function LocationCard(props) {
+export default function LocationCard({ name, country, remove, getWeather }) {
   return (
-    <li className="card" onClick={props.getWeather}>
-      <h2 className="card-city">{props.name}</h2>
-      <p className="card-country">{props.country}</p>
-      <button className="card-button btn" onClick={props.remove}>
+    <li className="card" onClick={getWeather}>
+      <h2 className="card-city">{name}</h2>
+      <p className="card-country">{country}</p>
+      <button className="card-button btn" onClick={remove}>
         Remove
       </button>
     </li>

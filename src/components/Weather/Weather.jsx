@@ -4,9 +4,9 @@ import { PropTypes } from "prop-types";
 import Loading from "../Loading/Loading";
 import "./Weather.css";
 
-export default function Weather({ isLoading: isLoading, weather: weather }) {
+export default function Weather({ isLoading, weather }) {
   const [showWeatherData, setShowWeatherData] = useState(true);
-  let loading = { isLoading };
+  const loading = isLoading;
 
   useEffect(() => {
     if (weather.city !== undefined) setShowWeatherData(false);
@@ -16,7 +16,7 @@ export default function Weather({ isLoading: isLoading, weather: weather }) {
   return (
     <div className="weather">
       <div className="container">
-        {loading.isLoading && <Loading />}
+        {loading && <Loading />}
 
         {showWeatherData ? (
           <h2 className="weather-title">No Location Selected</h2>
