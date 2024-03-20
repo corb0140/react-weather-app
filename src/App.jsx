@@ -71,6 +71,8 @@ function App() {
     locations.splice(index, 1);
     setLocations([...locations]);
 
+    setWeatherData({});
+
     ev.stopPropagation();
   };
 
