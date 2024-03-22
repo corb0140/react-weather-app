@@ -18,7 +18,6 @@ function App() {
 
   // weather states & refs
   const [weatherData, setWeatherData] = useState({});
-  const [weatherState, setWeatherState] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [coords, setCoords] = useState({ lat: null, lon: null });
 
@@ -83,14 +82,14 @@ function App() {
     const index = locations.findIndex((location) => location.id === id);
     const location = locations[index];
     setCoords({ lat: location.lat, lon: location.lon });
-
-    setWeatherState(!weatherState);
   };
 
   useEffect(() => {
     if (locations.length === 0) {
       return;
     }
+
+    setIsLoading(true);
 
     //call openweathermap api to get the weather
     fetch(
@@ -100,30 +99,25 @@ function App() {
         if (!response.ok) throw new Error("Incorrect Latitude & or Longitude");
 
         // show loading before making api call
-        setIsLoading(true);
 
         return response.json();
       })
       .then((data) => {
-        setTimeout(() => {
-          setWeatherData({
-            city: data.name,
-            icon: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
-            main: data.weather[0].main,
-            description: data.weather[0].description,
-            temp: data.main.temp,
-            feel_like: data.main.feels_like,
-            wind_speed: data.wind.speed,
-          });
-        }, 3000);
+        setWeatherData({
+          city: data.name,
+          icon: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
+          main: data.weather[0].main,
+          description: data.weather[0].description,
+          temp: data.main.temp,
+          feel_like: data.main.feels_like,
+          wind_speed: data.wind.speed,
+        });
       })
       .catch((error) => {
         console.error(error);
       })
       .finally(() => {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 3000);
+        setIsLoading(false);
       });
 
     return () => {};
