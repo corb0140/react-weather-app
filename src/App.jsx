@@ -16,7 +16,7 @@ function App() {
   // location state
   const [locations, setLocations] = useState([]);
 
-  // weather states & refs
+  // weather states
   const [weatherData, setWeatherData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [coords, setCoords] = useState({ lat: null, lon: null });
@@ -36,6 +36,7 @@ function App() {
   // remove feedback message after 3 seconds
   useEffect(() => {
     if (feedBackMessage === "" || feedBackMessage === null) {
+      // clear setTimeout for feedback message incase someone searches again before the 3 seconds
       clearTimeout(timer);
       return;
     } else if (
@@ -70,6 +71,7 @@ function App() {
     locations.splice(index, 1);
     setLocations([...locations]);
 
+    // clear weather data when there are no locations
     if (locations.length === 0) {
       setWeatherData({});
     }
@@ -89,6 +91,7 @@ function App() {
       return;
     }
 
+    // show loading sequence before making api call
     setIsLoading(true);
 
     //call openweathermap api to get the weather
@@ -97,8 +100,6 @@ function App() {
     )
       .then((response) => {
         if (!response.ok) throw new Error("Incorrect Latitude & or Longitude");
-
-        // show loading before making api call
 
         return response.json();
       })
