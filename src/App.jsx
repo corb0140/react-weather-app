@@ -41,7 +41,8 @@ function App() {
       return;
     } else if (
       feedBackMessage === "No matching locations" ||
-      feedBackMessage === "Maximum of 5 locations reached"
+      feedBackMessage === "Maximum of 5 locations reached" ||
+      feedBackMessage === "No location matching these coordinates"
     ) {
       setTimer(
         setTimeout(() => {
@@ -114,8 +115,9 @@ function App() {
           wind_speed: data.wind.speed,
         });
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
+        setError(true);
+        setFeedBackMessage("No location matching these coordinates");
       })
       .finally(() => {
         setIsLoading(false);

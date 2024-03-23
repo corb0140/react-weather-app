@@ -44,9 +44,8 @@ export default function SearchBar({ addLocation, error }) {
           setSearch("");
         }, 2000);
       })
-      .catch((error) => {
+      .catch(() => {
         errorProp();
-        console.error(error);
       });
 
     return () => {};
