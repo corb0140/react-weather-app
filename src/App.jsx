@@ -137,7 +137,7 @@ function App() {
           card={locations}
           getWeather={getWeather}
           removeLocation={removeLocation}
-        ></LocationBar>
+        />
         <Weather weather={weatherData} isLoading={isLoading}></Weather>
       </main>
     </>
