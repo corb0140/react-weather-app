@@ -1,4 +1,12 @@
 :root {
+  --dominant-color: #23395b;
+  --dominant-color-shade-1: #2e4a76;
+  --dominant-color-shade-2: #335284;
+  --dominant-color-shade-3: #395d93;
+  --secondary-color: #c11e16;
+  --off-white-color: #fafafa;
+  --font-family: "Montserrat", sans-serif;
+
   font-family: var(--font-family), Inter, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
   line-height: 1.5;
