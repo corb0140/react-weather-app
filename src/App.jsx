@@ -40,7 +40,8 @@ function App() {
     } else if (
       feedBackMessage === "No matching locations" ||
       feedBackMessage === "Maximum of 5 locations reached" ||
-      feedBackMessage === "No location matching these coordinates"
+      feedBackMessage === "No location matching these coordinates" ||
+      feedBackMessage === "Location already exists"
     ) {
       setTimer(
         setTimeout(() => {
@@ -59,13 +60,6 @@ function App() {
       if (locations.some((locale) => locale.name === location.name)) {
         setError(true);
         setFeedBackMessage("Location already exists");
-
-        setTimer(
-          setTimeout(() => {
-            setError(false);
-            setFeedBackMessage("");
-          }, 3000)
-        );
 
         return;
       }
