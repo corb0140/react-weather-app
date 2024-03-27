@@ -56,6 +56,20 @@ function App() {
   // add location
   const addLocation = (location) => {
     if (locations.length < 5) {
+      if (locations.some((locale) => locale.name === location.name)) {
+        setError(true);
+        setFeedBackMessage("Location already exists");
+
+        setTimer(
+          setTimeout(() => {
+            setError(false);
+            setFeedBackMessage("");
+          }, 3000)
+        );
+
+        return;
+      }
+
       setLocations([...locations, location]);
     } else {
       // show feedback component when there are 5 locations
