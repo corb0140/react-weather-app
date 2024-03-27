@@ -95,7 +95,7 @@ function App() {
 
     //call openweathermap api to get the weather
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&appid=${process.env.REACT_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
     )
       .then((response) => {
         if (!response.ok) throw new Error("Incorrect Latitude & or Longitude");
