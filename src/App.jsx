@@ -40,8 +40,7 @@ function App() {
     } else if (
       feedBackMessage === "No matching locations" ||
       feedBackMessage === "Maximum of 5 locations reached" ||
-      feedBackMessage === "No location matching these coordinates" ||
-      feedBackMessage === "Location already exists"
+      feedBackMessage === "No location matching these coordinates"
     ) {
       setTimer(
         setTimeout(() => {
@@ -57,13 +56,6 @@ function App() {
   // add location
   const addLocation = (location) => {
     if (locations.length < 5) {
-      if (locations.some((locale) => locale.name === location.name)) {
-        setError(true);
-        setFeedBackMessage("Location already exists");
-
-        return;
-      }
-
       setLocations([...locations, location]);
     } else {
       // show feedback component when there are 5 locations

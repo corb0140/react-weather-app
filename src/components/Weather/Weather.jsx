@@ -8,7 +8,7 @@ export default function Weather({ isLoading, weather }) {
   const [showWeatherData, setShowWeatherData] = useState(true);
 
   useEffect(() => {
-    if (weather.city !== undefined) {
+    if (weather.city) {
       setShowWeatherData(false);
     } else {
       setShowWeatherData(true);
