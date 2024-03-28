@@ -31,7 +31,6 @@ function App() {
     setFeedBackMessage("");
   };
 
-  // remove feedback message after 3 seconds
   useEffect(() => {
     if (feedBackMessage === "" || feedBackMessage === null) {
       // clear setTimeout for feedback message incase someone searches again before the 3 seconds
@@ -42,6 +41,7 @@ function App() {
       feedBackMessage === "Maximum of 5 locations reached" ||
       feedBackMessage === "No location matching these coordinates"
     ) {
+      // remove feedback message after 3 seconds
       setTimer(
         setTimeout(() => {
           setFeedBackMessage("");
