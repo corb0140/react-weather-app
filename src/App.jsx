@@ -18,6 +18,7 @@ function App() {
   const [weatherData, setWeatherData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [coords, setCoords] = useState({ lat: null, lon: null });
+  const [active, setActive] = useState(false);
 
   //show feedback
   const showFeedback = () => {
@@ -83,6 +84,9 @@ function App() {
     const index = locations.findIndex((location) => location.id === id);
     const location = locations[index];
     setCoords({ lat: location.lat, lon: location.lon });
+
+    // set active card
+    setActive(id);
   };
 
   useEffect(() => {
@@ -137,6 +141,7 @@ function App() {
           card={locations}
           getWeather={getWeather}
           removeLocation={removeLocation}
+          activeCard={active}
         />
         <Weather weather={weatherData} isLoading={isLoading}></Weather>
       </main>
